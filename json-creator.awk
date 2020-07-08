@@ -1,17 +1,17 @@
 BEGIN {
-  printf "There are the following emails found\n"; 
-  count=0; 
-  print "[" > "resuls.json";
-  out="";
+  printf "There are the following emails found:\n"; 
+  print "[" > "results.json";
 } 
 { 
   print $0; 
-  count++; 
-  out = out "\"" $0 "\",\n";
+  if (NR == total) {
+    print " \"" $0 "\"" > "results.json";
+  } else {
+	print " \"" $0 "\"," > "results.json";
+  }
 } 
 END {
-  printf "Total %d\n", count; 
-  out=substr(out, 1, length(out) - 2); 
-  printf "%s\n]",out > "resuls.json"; 
-  printf "There are generated json file with them - resuls.json";
+  printf "Total %d\n", NR; 
+  print "]" > "results.json"; 
+  printf "There is generated json file with them - results.json";
 }

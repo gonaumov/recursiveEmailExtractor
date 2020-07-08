@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-test -f resuls.json && rm resuls.json ;egrep --include="*.txt" -rwoih '[^[:space:]@]+@[^@[:space:]]+\.[^[:space:]]{2,4}' . | uniq | awk -f json-creator.awk
+total=`egrep --include="*.txt" -rwoih '[^[:space:]@]+@[^@[:space:]]+\.[^[:space:]]{2,4}' . | wc -l`
+
+test -f results.json && rm results.json; egrep --include="*.txt" -rwoih '[^[:space:]@]+@[^@[:space:]]+\.[^[:space:]]{2,4}' . | sort | uniq | awk -v total=$total -f json-creator.awk
